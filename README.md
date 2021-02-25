@@ -15,3 +15,15 @@ npm i axios
 
 ### format date
 npm i date-fns
+
+### loading
+npm i react-topbar-progress-indicator
+
+### pagination
+npm install react-paginate --save
+
+### propTypes
+npm i prop-types
+
+### react query
+npm i react-query
