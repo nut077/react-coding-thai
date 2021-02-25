@@ -1,9 +1,8 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import Switch from 'react-bootstrap/Switch';
 import AboutPage from './pages/AboutPage';
 import ProductPage from './pages/ProductPage';
 import TopBarProgress from 'react-topbar-progress-indicator';

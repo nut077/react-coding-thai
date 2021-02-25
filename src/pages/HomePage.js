@@ -1,22 +1,36 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
+import axios, { CancelToken } from 'axios';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import ErrorPage from './ErrorPage';
 import { Container } from 'react-bootstrap';
 
 const HomePage = () => {
-  const { isLoading, error, data } = useQuery('repoData', () =>
-    fetch('https://api.codingthailand.com/api/news?page=3').then((res) =>
-      res.json()
-    )
-  );
+  const fetchNews = () => {
+    const source = CancelToken.source();
+    const promise = axios
+      .get('https://api.codingthailand.com/api/news?page=3', {
+        cancelToken: source.token,
+      })
+      .then((res) => res.data);
+    promise.cancel = () => {
+      source.cancel('Query was cancelled by React Query');
+    };
+    return promise;
+  };
 
-  if (isLoading) return <TopBarProgress />;
+  const { isLoading, error, data } = useQuery('HomePage', () => fetchNews());
 
-  if (error) return <ErrorPage error={error.message} />;
+  if (isLoading) {
+    return <TopBarProgress />;
+  }
+
+  if (error) {
+    return <ErrorPage error={error.message} />;
+  }
 
   return (
-    <main role="main">
+    <>
       <div className="jumbotron">
         <div className="container">
           <h1 className="display-3">welcome !!</h1>
@@ -44,7 +58,7 @@ const HomePage = () => {
         </div>
         <hr />
       </Container>
-    </main>
+    </>
   );
 };
 
