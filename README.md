@@ -27,3 +27,9 @@ npm i prop-types
 
 ### react query
 npm i react-query
+
+### react hook form
+npm install react-hook-form
+
+### validation
+npm install @hookform/resolvers yup

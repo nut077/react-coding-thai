@@ -44,7 +44,7 @@ const HospitalPage = () => {
   }
 
   if (error) {
-    return <ErrorPage error={error.response.data.message} />;
+    return <ErrorPage error={error.message} />;
   }
 
   return (

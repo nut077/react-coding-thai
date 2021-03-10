@@ -9,6 +9,8 @@ import TopBarProgress from 'react-topbar-progress-indicator';
 import DetailPage from './pages/DetailPage';
 import HospitalPage from './pages/hospital/HospitalPage';
 import NewsPage from './pages/news/NewsPage';
+import CreatePage from './pages/news/CreatePage';
+import EditPage from './pages/news/EditPage';
 
 TopBarProgress.config({
   barColors: {
@@ -31,7 +33,19 @@ function App() {
             <Route path="/product" component={ProductPage} />
             <Route path="/detail/:id/title/:title" component={DetailPage} />
             <Route path="/hospital" component={HospitalPage} />
-            <Route path="/news" component={NewsPage} />
+            {/*<Route path="/news/create" component={CreatePage} />
+            <Route path="/news/edit/:id" component={EditPage} />
+            <Route path="/news" component={NewsPage} />*/}
+            <Route
+              path="/news"
+              render={({ match: { url } }) => (
+                <>
+                  <Route exact path={`${url}/`} component={NewsPage} />
+                  <Route path={`${url}/edit/:id`} component={EditPage} />
+                  <Route path={`${url}/create`} component={CreatePage} />
+                </>
+              )}
+            />
             <Route exact path="/" component={HomePage} />
           </Switch>
           <Footer />
