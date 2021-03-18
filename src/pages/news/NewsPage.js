@@ -36,6 +36,16 @@ const NewsPage = () => {
     history.push(page);
   };
 
+  const deleteNews = async (id) => {
+    const isConfirm = window.confirm(`Do you want to delete news id ${id}?`);
+    if (isConfirm === true) {
+      const res = await axios.delete(
+        `https://api.codingthailand.com/api/category/${id}`
+      );
+      alert(res.data.message);
+    }
+  };
+
   return (
     <Container>
       <div className="row mt-4">
@@ -70,7 +80,12 @@ const NewsPage = () => {
                     >
                       <BsPencil />
                     </Button>
-                    <Button className="ml-2" variant="outline-danger" size="sm">
+                    <Button
+                      className="ml-2"
+                      variant="outline-danger"
+                      size="sm"
+                      onClick={() => deleteNews(id)}
+                    >
                       <BsTrash />
                     </Button>
                   </td>
