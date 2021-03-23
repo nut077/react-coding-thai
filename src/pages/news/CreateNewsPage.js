@@ -4,13 +4,17 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from 'axios';
+import { useMutation } from 'react-query';
+import TopBarProgress from 'react-topbar-progress-indicator';
+import ErrorPage from '../ErrorPage';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is not blank'),
 });
 
-const CreatePage = () => {
+const CreateNewsPage = () => {
   const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -20,7 +24,12 @@ const CreatePage = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = async (data) => {
+
+  const onSubmit = (data) => {
+    mutaion.mutate(data);
+  };
+
+  const createNews = async (data) => {
     const res = await axios.post(
       'https://api.codingthailand.com/api/category',
       {
@@ -30,6 +39,20 @@ const CreatePage = () => {
     alert(res.data.message);
     history.push('/news');
   };
+
+  const mutaion = useMutation(createNews);
+
+  const goBack = () => {
+    history.goBack();
+  };
+
+  if (mutaion.isLoading) {
+    return <TopBarProgress />;
+  }
+
+  if (mutaion.isError) {
+    return <ErrorPage error={mutaion.error.message} />;
+  }
 
   return (
     <Container className="mt-4">
@@ -52,6 +75,10 @@ const CreatePage = () => {
             <Button variant="primary" type="submit">
               Save
             </Button>
+            &nbsp;
+            <Button variant="secondary" onClick={goBack}>
+              Back
+            </Button>
           </Form>
         </Col>
       </Row>
@@ -59,4 +86,4 @@ const CreatePage = () => {
   );
 };
 
-export default CreatePage;
+export default CreateNewsPage;

@@ -2,7 +2,6 @@ import axios, { CancelToken } from 'axios';
 import { useHistory } from 'react-router-dom';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import ErrorPage from '../ErrorPage';
-import { th } from 'date-fns/locale';
 import { Button, Container, Table } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { BsPencil, BsTrash } from 'react-icons/bs';
@@ -22,7 +21,7 @@ const NewsPage = () => {
     return promise;
   };
 
-  const { isLoading, error, data } = useQuery('news', () => fetchNews());
+  const { isLoading, error, data } = useQuery('news', fetchNews);
 
   if (isLoading) {
     return <TopBarProgress />;

@@ -16,9 +16,7 @@ const AboutPage = () => {
     };
     return promise;
   };
-  const { isLoading, error, data } = useQuery('AboutPage', () =>
-    fetchVersion()
-  );
+  const { isLoading, error, data } = useQuery('AboutPage', fetchVersion);
 
   if (isLoading) {
     return <TopBarProgress />;
