@@ -11,6 +11,8 @@ import HospitalPage from './pages/hospital/HospitalPage';
 import NewsPage from './pages/news/NewsPage';
 import CreateNewsPage from './pages/news/CreateNewsPage';
 import EditNewsPage from './pages/news/EditNewsPage';
+import UploadPage from './pages/UploadPage';
+import { ToastProvider } from 'react-toast-notifications';
 
 TopBarProgress.config({
   barColors: {
@@ -24,34 +26,37 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <div style={{ paddingBottom: '60px' }}>
-          <NavBar />
-          <Switch>
-            <Route path="/about" component={AboutPage} />
-            <Route path="/product" component={ProductPage} />
-            <Route path="/detail/:id/title/:title" component={DetailPage} />
-            <Route path="/hospital" component={HospitalPage} />
-            {/*<Route path="/news/create" component={CreateNewsPage} />
+    <ToastProvider autoDismiss>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <div style={{ paddingBottom: '60px' }}>
+            <NavBar />
+            <Switch>
+              <Route path="/about" component={AboutPage} />
+              <Route path="/product" component={ProductPage} />
+              <Route path="/detail/:id/title/:title" component={DetailPage} />
+              <Route path="/hospital" component={HospitalPage} />
+              {/*<Route path="/news/create" component={CreateNewsPage} />
             <Route path="/news/edit/:id" component={EditNewsPage} />
             <Route path="/news" component={NewsPage} />*/}
-            <Route
-              path="/news"
-              render={({ match: { url } }) => (
-                <>
-                  <Route exact path={`${url}/`} component={NewsPage} />
-                  <Route path={`${url}/edit/:id`} component={EditNewsPage} />
-                  <Route path={`${url}/create`} component={CreateNewsPage} />
-                </>
-              )}
-            />
-            <Route exact path="/" component={HomePage} />
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
-    </QueryClientProvider>
+              <Route
+                path="/news"
+                render={({ match: { url } }) => (
+                  <>
+                    <Route exact path={`${url}/`} component={NewsPage} />
+                    <Route path={`${url}/edit/:id`} component={EditNewsPage} />
+                    <Route path={`${url}/create`} component={CreateNewsPage} />
+                  </>
+                )}
+              />
+              <Route path="/upload" component={UploadPage} />
+              <Route exact path="/" component={HomePage} />
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </QueryClientProvider>
+    </ToastProvider>
   );
 }
 

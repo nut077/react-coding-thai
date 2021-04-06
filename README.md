@@ -33,3 +33,6 @@ npm install react-hook-form
 
 ### validation
 npm install @hookform/resolvers yup
+
+### alert toast
+npm i react-toast-notifications

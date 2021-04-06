@@ -55,6 +55,14 @@ const NavBar = () => {
               News (CRUD)
             </NavDropdown.Item>
           </NavDropdown>
+          <NavLink
+            className="nav-link"
+            to="/upload"
+            exact
+            activeClassName="active"
+          >
+            Upload file
+          </NavLink>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />

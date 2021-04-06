@@ -26,7 +26,7 @@ const CreateNewsPage = () => {
   });
 
   const onSubmit = (data) => {
-    mutaion.mutate(data);
+    mutation.mutate(data);
   };
 
   const createNews = async (data) => {
@@ -40,18 +40,18 @@ const CreateNewsPage = () => {
     history.push('/news');
   };
 
-  const mutaion = useMutation(createNews);
+  const mutation = useMutation(createNews);
 
   const goBack = () => {
     history.goBack();
   };
 
-  if (mutaion.isLoading) {
+  if (mutation.isLoading) {
     return <TopBarProgress />;
   }
 
-  if (mutaion.isError) {
-    return <ErrorPage error={mutaion.error.message} />;
+  if (mutation.isError) {
+    return <ErrorPage error={mutation.error.message} />;
   }
 
   return (
