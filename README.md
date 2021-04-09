@@ -36,3 +36,9 @@ npm install @hookform/resolvers yup
 
 ### alert toast
 npm i react-toast-notifications
+
+### react loader spinner
+npm i react-loader-spinner
+
+### react confirm
+npm i react-confirm-alert

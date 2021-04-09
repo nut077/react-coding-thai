@@ -40,7 +40,6 @@ const UploadPage = () => {
     } catch (err) {
       addToast(err, {
         appearance: 'error',
-        autoDismiss: true,
         autoDismissTimeout: 3000,
       });
     }
