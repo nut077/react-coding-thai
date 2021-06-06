@@ -1,18 +1,28 @@
-import {
-  Button,
-  Form,
-  FormControl,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from 'react-bootstrap';
+import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { NavLink, useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const NavBar = () => {
   const history = useHistory();
 
   const goPage = (page) => {
     history.replace(page);
+  };
+
+  const [profile, setProfile] = useState();
+
+  useEffect(() => {
+    const profileValue = JSON.parse(localStorage.getItem('profile'));
+    if (profileValue) {
+      setProfile(profileValue);
+    }
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('profile');
+    history.go(0);
+    history.replace('/');
   };
 
   return (
@@ -63,11 +73,46 @@ const NavBar = () => {
           >
             Upload file
           </NavLink>
+          <NavLink
+            className="nav-link"
+            to="/member"
+            exact
+            activeClassName="active"
+          >
+            Member
+          </NavLink>
         </Nav>
-        <Form inline>
+        {/*<Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-success">Search</Button>
-        </Form>
+        </Form>*/}
+        {profile ? (
+          <span className="navbar-text text-white">
+            Welcome {profile.name}&nbsp;
+            <Button variant="danger" onClick={logout}>
+              Logout
+            </Button>
+          </span>
+        ) : (
+          <Nav>
+            <NavLink
+              className="nav-link"
+              to="/register"
+              exact
+              activeClassName="active"
+            >
+              Register
+            </NavLink>
+            <NavLink
+              className="nav-link"
+              to="/login"
+              exact
+              activeClassName="active"
+            >
+              Login
+            </NavLink>
+          </Nav>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

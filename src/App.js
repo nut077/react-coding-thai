@@ -13,6 +13,10 @@ import CreateNews from './pages/news/CreateNews';
 import EditNews from './pages/news/EditNews';
 import UploadPage from './pages/UploadPage';
 import { ToastProvider } from 'react-toast-notifications';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import MemberPage from './pages/MemberPage';
+import PrivateRoute from './guard/auth';
 
 TopBarProgress.config({
   barColors: {
@@ -36,10 +40,10 @@ function App() {
               <Route path="/product" component={ProductPage} />
               <Route path="/detail/:id/title/:title" component={DetailPage} />
               <Route path="/hospital" component={HospitalPage} />
-              {/*<Route path="/news/create" component={CreateNews} />
-            <Route path="/news/edit/:id" component={EditNews} />
-            <Route path="/news" component={NewsList} />*/}
-              <Route
+              <Route path="/news/create" component={CreateNews} />
+              <Route path="/news/edit/:id" component={EditNews} />
+              <Route path="/news" component={NewsList} />
+              {/*<Route
                 path="/news"
                 render={({ match: { url } }) => (
                   <>
@@ -48,8 +52,14 @@ function App() {
                     <Route path={`${url}/create`} component={CreateNews} />
                   </>
                 )}
-              />
+              />*/}
               <Route path="/upload" component={UploadPage} />
+              <Route path="/register" component={RegisterPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/upload" component={UploadPage} />
+              <PrivateRoute path="/member">
+                <MemberPage />
+              </PrivateRoute>
               <Route exact path="/" component={HomePage} />
             </Switch>
             <Footer />
