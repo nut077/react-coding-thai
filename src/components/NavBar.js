@@ -1,27 +1,28 @@
+import React, { useEffect } from 'react';
 import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { UserStoreContext } from '../context/UserStoreContext';
 
 const NavBar = () => {
   const history = useHistory();
+  const userStore = React.useContext(UserStoreContext);
 
   const goPage = (page) => {
     history.replace(page);
   };
 
-  const [profile, setProfile] = useState();
-
   useEffect(() => {
     const profileValue = JSON.parse(localStorage.getItem('profile'));
     if (profileValue) {
-      setProfile(profileValue);
+      userStore.updateProfile(profileValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('profile');
-    history.go(0);
+    userStore.updateProfile(null);
     history.replace('/');
   };
 
@@ -86,9 +87,9 @@ const NavBar = () => {
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-success">Search</Button>
         </Form>*/}
-        {profile ? (
+        {userStore.profile ? (
           <span className="navbar-text text-white">
-            Welcome {profile.name}&nbsp;
+            Welcome {userStore.profile.name}&nbsp;
             <Button variant="danger" onClick={logout}>
               Logout
             </Button>

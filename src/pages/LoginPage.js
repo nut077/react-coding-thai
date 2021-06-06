@@ -1,12 +1,15 @@
+import React from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useMutation } from 'react-query';
 import LoginForm from './shared/LoginForm';
+import { UserStoreContext } from '../context/UserStoreContext';
 
 const LoginPage = () => {
   const { addToast } = useToasts();
   const history = useHistory();
+  const userStore = React.useContext(UserStoreContext);
 
   const login = async ({ ...data }) => {
     try {
@@ -27,11 +30,14 @@ const LoginPage = () => {
         'profile',
         JSON.stringify(resProfile.data.data.user)
       );
+
       addToast('Login success', {
         appearance: 'success',
       });
+
+      const profileValue = JSON.parse(localStorage.getItem('profile'));
+      userStore.updateProfile(profileValue);
       history.replace('/');
-      history.go(0);
     } catch (err) {
       addToast(err.response.data.message, {
         appearance: 'error',

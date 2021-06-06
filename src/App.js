@@ -17,6 +17,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import MemberPage from './pages/MemberPage';
 import PrivateRoute from './guard/auth';
+import UserStoreProvider from './context/UserStoreContext';
 
 TopBarProgress.config({
   barColors: {
@@ -30,20 +31,21 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <ToastProvider autoDismiss autoDismissTimeout={3000}>
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <div style={{ paddingBottom: '60px' }}>
-            <NavBar />
-            <Switch>
-              <Route path="/about" component={AboutPage} />
-              <Route path="/product" component={ProductPage} />
-              <Route path="/detail/:id/title/:title" component={DetailPage} />
-              <Route path="/hospital" component={HospitalPage} />
-              <Route path="/news/create" component={CreateNews} />
-              <Route path="/news/edit/:id" component={EditNews} />
-              <Route path="/news" component={NewsList} />
-              {/*<Route
+    <UserStoreProvider>
+      <ToastProvider autoDismiss autoDismissTimeout={3000}>
+        <QueryClientProvider client={queryClient}>
+          <Router>
+            <div style={{ paddingBottom: '60px' }}>
+              <NavBar />
+              <Switch>
+                <Route path="/about" component={AboutPage} />
+                <Route path="/product" component={ProductPage} />
+                <Route path="/detail/:id/title/:title" component={DetailPage} />
+                <Route path="/hospital" component={HospitalPage} />
+                <Route path="/news/create" component={CreateNews} />
+                <Route path="/news/edit/:id" component={EditNews} />
+                <Route path="/news" component={NewsList} />
+                {/*<Route
                 path="/news"
                 render={({ match: { url } }) => (
                   <>
@@ -53,20 +55,21 @@ function App() {
                   </>
                 )}
               />*/}
-              <Route path="/upload" component={UploadPage} />
-              <Route path="/register" component={RegisterPage} />
-              <Route path="/login" component={LoginPage} />
-              <Route path="/upload" component={UploadPage} />
-              <PrivateRoute path="/member">
-                <MemberPage />
-              </PrivateRoute>
-              <Route exact path="/" component={HomePage} />
-            </Switch>
-            <Footer />
-          </div>
-        </Router>
-      </QueryClientProvider>
-    </ToastProvider>
+                <Route path="/upload" component={UploadPage} />
+                <Route path="/register" component={RegisterPage} />
+                <Route path="/login" component={LoginPage} />
+                <Route path="/upload" component={UploadPage} />
+                <PrivateRoute path="/member">
+                  <MemberPage />
+                </PrivateRoute>
+                <Route exact path="/" component={HomePage} />
+              </Switch>
+              <Footer />
+            </div>
+          </Router>
+        </QueryClientProvider>
+      </ToastProvider>
+    </UserStoreProvider>
   );
 }
 

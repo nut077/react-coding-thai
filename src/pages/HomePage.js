@@ -9,7 +9,7 @@ const HomePage = () => {
   const fetchNews = () => {
     const source = CancelToken.source();
     const promise = axios
-      .get('https://api.codingthailand.com/api/news?page=3', {
+      .get('https://api.codingthailand.com/api/news?page=1', {
         cancelToken: source.token,
       })
       .then((res) => res.data);
