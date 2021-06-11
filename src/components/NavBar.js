@@ -1,20 +1,27 @@
 import React, { useEffect } from 'react';
 import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { NavLink, useHistory } from 'react-router-dom';
-import { UserStoreContext } from '../context/UserStoreContext';
+
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { updateProfile } from '../redux/actions/authAction';
 
 const NavBar = () => {
   const history = useHistory();
-  const userStore = React.useContext(UserStoreContext);
+
+  // redux
+  const profileRedux = useSelector((state) => state.authReducer.profile);
+  const dispatch = useDispatch();
 
   const goPage = (page) => {
     history.replace(page);
   };
 
+  // redux
   useEffect(() => {
     const profileValue = JSON.parse(localStorage.getItem('profile'));
     if (profileValue) {
-      userStore.updateProfile(profileValue);
+      dispatch(updateProfile(profileValue));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -22,7 +29,7 @@ const NavBar = () => {
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('profile');
-    userStore.updateProfile(null);
+    dispatch(updateProfile(null));
     history.replace('/');
   };
 
@@ -87,9 +94,10 @@ const NavBar = () => {
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-success">Search</Button>
         </Form>*/}
-        {userStore.profile ? (
+
+        {profileRedux ? (
           <span className="navbar-text text-white">
-            Welcome {userStore.profile.name}&nbsp;
+            Welcome {profileRedux.name}&nbsp;
             <Button variant="danger" onClick={logout}>
               Logout
             </Button>

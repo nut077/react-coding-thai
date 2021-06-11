@@ -4,12 +4,23 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useMutation } from 'react-query';
 import LoginForm from './shared/LoginForm';
-import { UserStoreContext } from '../context/UserStoreContext';
+
+// context
+//import { UserStoreContext } from '../context/UserStoreContext';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { updateProfile } from '../redux/actions/authAction';
 
 const LoginPage = () => {
   const { addToast } = useToasts();
   const history = useHistory();
-  const userStore = React.useContext(UserStoreContext);
+
+  // context
+  //const userStore = React.useContext(UserStoreContext);
+
+  // call redux action
+  const dispatch = useDispatch();
 
   const login = async ({ ...data }) => {
     try {
@@ -36,7 +47,8 @@ const LoginPage = () => {
       });
 
       const profileValue = JSON.parse(localStorage.getItem('profile'));
-      userStore.updateProfile(profileValue);
+
+      dispatch(updateProfile(profileValue));
       history.replace('/');
     } catch (err) {
       addToast(err.response.data.message, {

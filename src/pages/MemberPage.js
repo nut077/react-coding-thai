@@ -1,18 +1,17 @@
 import React from 'react';
-import { UserStoreContext } from '../context/UserStoreContext';
+import { useSelector } from 'react-redux';
 
 const MemberPage = () => {
-  const userStore = React.useContext(UserStoreContext);
-
+  const profileRedux = useSelector((state) => state.authReducer.profile);
   return (
     <div className="container">
       <div className="row mt-4">
         <div className="col-md-12">
           <h1>For member only</h1>
 
-          {userStore.profile && (
+          {profileRedux && (
             <p>
-              Welcome {userStore.profile.name} Email: {userStore.profile.email}
+              Welcome {profileRedux.name} Email: {profileRedux.email}
             </p>
           )}
         </div>

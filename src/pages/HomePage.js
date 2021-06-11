@@ -5,7 +5,13 @@ import TopBarProgress from 'react-topbar-progress-indicator';
 import ErrorPage from './ErrorPage';
 import { Container } from 'react-bootstrap';
 
+// redux
+import { useSelector } from 'react-redux';
+
 const HomePage = () => {
+  // redux
+  const profileRedux = useSelector((state) => state.authReducer.profile);
+
   const fetchNews = () => {
     const source = CancelToken.source();
     const promise = axios
@@ -33,7 +39,7 @@ const HomePage = () => {
     <>
       <div className="jumbotron">
         <div className="container">
-          <h1 className="display-3">welcome !!</h1>
+          <h1 className="display-3">welcome {profileRedux?.name}</h1>
           <p>Create with React</p>
           <p>
             <Link

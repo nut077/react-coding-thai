@@ -19,6 +19,13 @@ import MemberPage from './pages/MemberPage';
 import PrivateRoute from './guard/auth';
 import UserStoreProvider from './context/UserStoreContext';
 
+// redux setup
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './redux/reducers';
+
+const store = createStore(rootReducer);
+
 TopBarProgress.config({
   barColors: {
     0: '#b5bcb4',
@@ -31,21 +38,25 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <UserStoreProvider>
-      <ToastProvider autoDismiss autoDismissTimeout={3000}>
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <div style={{ paddingBottom: '60px' }}>
-              <NavBar />
-              <Switch>
-                <Route path="/about" component={AboutPage} />
-                <Route path="/product" component={ProductPage} />
-                <Route path="/detail/:id/title/:title" component={DetailPage} />
-                <Route path="/hospital" component={HospitalPage} />
-                <Route path="/news/create" component={CreateNews} />
-                <Route path="/news/edit/:id" component={EditNews} />
-                <Route path="/news" component={NewsList} />
-                {/*<Route
+    <Provider store={store}>
+      <UserStoreProvider>
+        <ToastProvider autoDismiss autoDismissTimeout={3000}>
+          <QueryClientProvider client={queryClient}>
+            <Router>
+              <div style={{ paddingBottom: '60px' }}>
+                <NavBar />
+                <Switch>
+                  <Route path="/about" component={AboutPage} />
+                  <Route path="/product" component={ProductPage} />
+                  <Route
+                    path="/detail/:id/title/:title"
+                    component={DetailPage}
+                  />
+                  <Route path="/hospital" component={HospitalPage} />
+                  <Route path="/news/create" component={CreateNews} />
+                  <Route path="/news/edit/:id" component={EditNews} />
+                  <Route path="/news" component={NewsList} />
+                  {/*<Route
                 path="/news"
                 render={({ match: { url } }) => (
                   <>
@@ -55,21 +66,22 @@ function App() {
                   </>
                 )}
               />*/}
-                <Route path="/upload" component={UploadPage} />
-                <Route path="/register" component={RegisterPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/upload" component={UploadPage} />
-                <PrivateRoute path="/member">
-                  <MemberPage />
-                </PrivateRoute>
-                <Route exact path="/" component={HomePage} />
-              </Switch>
-              <Footer />
-            </div>
-          </Router>
-        </QueryClientProvider>
-      </ToastProvider>
-    </UserStoreProvider>
+                  <Route path="/upload" component={UploadPage} />
+                  <Route path="/register" component={RegisterPage} />
+                  <Route path="/login" component={LoginPage} />
+                  <Route path="/upload" component={UploadPage} />
+                  <PrivateRoute path="/member">
+                    <MemberPage />
+                  </PrivateRoute>
+                  <Route exact path="/" component={HomePage} />
+                </Switch>
+                <Footer />
+              </div>
+            </Router>
+          </QueryClientProvider>
+        </ToastProvider>
+      </UserStoreProvider>
+    </Provider>
   );
 }
 

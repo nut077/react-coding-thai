@@ -4,7 +4,7 @@ npm i react-bootstrap bootstrap
 
 ### react icon
 
-npm i react-icons --save
+npm i react-icons
 
 ### react router dom
 
@@ -20,7 +20,7 @@ npm i date-fns
 npm i react-topbar-progress-indicator
 
 ### pagination
-npm install react-paginate --save
+npm install react-paginate
 
 ### propTypes
 npm i prop-types
@@ -42,3 +42,9 @@ npm i react-loader-spinner
 
 ### react confirm
 npm i react-confirm-alert
+
+### redux
+npm i redux
+
+### react redux
+npm i react-redux
