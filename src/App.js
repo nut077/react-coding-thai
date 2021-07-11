@@ -21,10 +21,11 @@ import UserStoreProvider from './context/UserStoreContext';
 
 // redux setup
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './redux/reducers';
+import CartPage from './pages/CartPage';
+import configureStore from './redux/configureStore';
 
-const store = createStore(rootReducer);
+//const store = createStore(rootReducer);
+const { store } = configureStore();
 
 TopBarProgress.config({
   barColors: {
@@ -56,6 +57,7 @@ function App() {
                   <Route path="/news/create" component={CreateNews} />
                   <Route path="/news/edit/:id" component={EditNews} />
                   <Route path="/news" component={NewsList} />
+
                   {/*<Route
                 path="/news"
                 render={({ match: { url } }) => (
@@ -70,9 +72,11 @@ function App() {
                   <Route path="/register" component={RegisterPage} />
                   <Route path="/login" component={LoginPage} />
                   <Route path="/upload" component={UploadPage} />
+
                   <PrivateRoute path="/member">
                     <MemberPage />
                   </PrivateRoute>
+                  <Route path="/cart" component={CartPage} />
                   <Route exact path="/" component={HomePage} />
                 </Switch>
                 <Footer />

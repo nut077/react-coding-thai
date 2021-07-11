@@ -11,6 +11,7 @@ const NavBar = () => {
 
   // redux
   const profileRedux = useSelector((state) => state.authReducer.profile);
+  const total = useSelector((state) => state.cartReducer.total);
   const dispatch = useDispatch();
 
   const goPage = (page) => {
@@ -54,7 +55,7 @@ const NavBar = () => {
             exact
             activeClassName="active"
           >
-            สินค้า
+            Products
           </NavLink>
           <NavLink
             className="nav-link"
@@ -62,7 +63,15 @@ const NavBar = () => {
             exact
             activeClassName="active"
           >
-            เกี่ยวกับ
+            About
+          </NavLink>
+          <NavLink
+            className="nav-link"
+            to="/cart"
+            exact
+            activeClassName="active"
+          >
+            Cart {total}
           </NavLink>
           <NavDropdown title="Workshop" id="basic-nav-dropdown">
             <NavDropdown.Item onClick={() => goPage('/hospital')}>

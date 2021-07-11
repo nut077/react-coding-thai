@@ -48,3 +48,6 @@ npm i redux
 
 ### react redux
 npm i react-redux
+
+### redux persist save data to localStorage
+npm i redux-persist
