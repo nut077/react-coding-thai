@@ -51,3 +51,9 @@ npm i react-redux
 
 ### redux persist save data to localStorage
 npm i redux-persist
+
+### rexux thunk
+npm i redux-thunk
+
+### redux devtools extension
+npm i redux-devtools-extension
