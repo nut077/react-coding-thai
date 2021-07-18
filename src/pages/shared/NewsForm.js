@@ -22,9 +22,7 @@ const NewsForm = ({
   const {
     register,
     handleSubmit,
-    errors,
-    formState: { touched },
-    getValues,
+    formState: { touchedFields, errors },
   } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
@@ -49,9 +47,9 @@ const NewsForm = ({
                 type="text"
                 name="name"
                 id="name"
-                ref={register}
+                {...register('name')}
                 isInvalid={!!errors.name}
-                isValid={touched.name && !!getValues('name')}
+                isValid={touchedFields.name}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.name?.message}

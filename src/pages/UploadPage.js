@@ -13,7 +13,11 @@ const UploadPage = () => {
   const history = useHistory();
   const { addToast } = useToasts();
 
-  const { handleSubmit, register, errors } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     mutation.mutate(data);
@@ -65,7 +69,7 @@ const UploadPage = () => {
               <Form.Control
                 type="file"
                 name="picture"
-                ref={register({
+                {...register('picture', {
                   required: 'Picture is require',
                   validate: {
                     checkFileType: (value) =>

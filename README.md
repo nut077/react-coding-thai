@@ -57,3 +57,6 @@ npm i redux-thunk
 
 ### redux devtools extension
 npm i redux-devtools-extension
+
+### react pdf
+npm install @react-pdf/renderer --save

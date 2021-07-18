@@ -23,6 +23,7 @@ import UserStoreProvider from './context/UserStoreContext';
 import { Provider } from 'react-redux';
 import CartPage from './pages/CartPage';
 import configureStore from './redux/configureStore';
+import PdfReport from './pages/report/PdfReport';
 
 //const store = createStore(rootReducer);
 const { store } = configureStore();
@@ -72,6 +73,7 @@ function App() {
                   <Route path="/register" component={RegisterPage} />
                   <Route path="/login" component={LoginPage} />
                   <Route path="/upload" component={UploadPage} />
+                  <Route path="/pdf" component={PdfReport} />
 
                   <PrivateRoute path="/member">
                     <MemberPage />

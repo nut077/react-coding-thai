@@ -1,18 +1,11 @@
 import axios, { CancelToken } from 'axios';
 
 export const fetchNews = async ({ queryKey }) => {
-  const source = CancelToken.source();
   const id = queryKey[1]['id'];
-  const promise = await axios.get(
-    `https://api.codingthailand.com/api/category/${id}`,
-    {
-      cancelToken: source.token,
-    }
+  const res = await axios.get(
+    `https://api.codingthailand.com/api/category/${id}`
   );
-  promise.cancel = () => {
-    source.cancel('Query was cancelled by React Query');
-  };
-  return promise;
+  return res.data;
 };
 
 export const fetchNewsAll = () => {

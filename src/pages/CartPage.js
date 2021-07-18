@@ -20,6 +20,9 @@ const CartPage = () => {
           >
             Clear item
           </Button>
+          <Button variant="info" className="btn-sm mb-3 ml-4">
+            Report PDF
+          </Button>
           <Table striped bordered hover>
             <thead>
               <tr>

@@ -27,9 +27,7 @@ const LoginForm = ({
   const {
     register,
     handleSubmit,
-    errors,
-    formState: { touched },
-    getValues,
+    formState: { touchedFields, errors },
   } = useForm({
     defaultValues,
     resolver: yupResolver(schema),
@@ -54,9 +52,9 @@ const LoginForm = ({
                 type="text"
                 name="email"
                 id="email"
-                ref={register}
+                {...register('email')}
                 isInvalid={!!errors.email}
-                isValid={touched.email && !!getValues('email')}
+                isValid={touchedFields.email}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.email?.message}
@@ -68,9 +66,9 @@ const LoginForm = ({
                 type="password"
                 name="password"
                 id="password"
-                ref={register}
+                {...register('password')}
                 isInvalid={!!errors.password}
-                isValid={touched.password && !!getValues('password')}
+                isValid={touchedFields.password}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.password?.message}

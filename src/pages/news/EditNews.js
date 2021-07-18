@@ -24,7 +24,8 @@ const EditNews = () => {
 
   const { data, error, isLoading, isError } = useQuery(
     ['news', { id }],
-    fetchNews
+    fetchNews,
+    { cacheTime: 0 }
   );
   const {
     mutateAsync,
@@ -46,15 +47,17 @@ const EditNews = () => {
     return <ErrorPage error={error.message} />;
   }
 
-  return (
-    <NewsForm
-      defaultValues={data.data}
-      onFormSubmit={onFormSubmit}
-      isLoading={isMutatingLoading}
-      isError={isMutatingError}
-      error={errorMutation}
-    />
-  );
+  if (data) {
+    return (
+      <NewsForm
+        defaultValues={data}
+        onFormSubmit={onFormSubmit}
+        isLoading={isMutatingLoading}
+        isError={isMutatingError}
+        error={errorMutation}
+      />
+    );
+  }
 };
 
 export default EditNews;
