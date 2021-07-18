@@ -59,4 +59,7 @@ npm i redux-thunk
 npm i redux-devtools-extension
 
 ### react pdf
-npm install @react-pdf/renderer --save
+yarn add @react-pdf/renderer
+
+### react pdf table
+yarn add @david.kucsai/react-pdf-table

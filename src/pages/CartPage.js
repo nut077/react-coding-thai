@@ -1,13 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { th } from 'date-fns/locale';
 import { Button, Table } from 'react-bootstrap';
-import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { clearAllCart } from '../redux/actions/cartAction';
 
 const CartPage = () => {
+  const history = useHistory();
   const cart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
   const dispatch = useDispatch();
+
+  const goPagePdf = () => {
+    history.replace('/pdf');
+  };
+
   return (
     <div className="container">
       <div className="row mt-4">
@@ -20,7 +26,11 @@ const CartPage = () => {
           >
             Clear item
           </Button>
-          <Button variant="info" className="btn-sm mb-3 ml-4">
+          <Button
+            variant="info"
+            className="btn-sm mb-3 ml-4"
+            onClick={goPagePdf}
+          >
             Report PDF
           </Button>
           <Table striped bordered hover>
