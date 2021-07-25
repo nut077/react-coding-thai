@@ -1,0 +1,10 @@
+export { default as AboutPage } from './AboutPage';
+export { default as CartPage } from './CartPage';
+export { default as DetailPage } from './DetailPage';
+export { default as ErrorPage } from './ErrorPage';
+export { default as HomePage } from './HomePage';
+export { default as LoginPage } from './LoginPage';
+export { default as MemberPage } from './MemberPage';
+export { default as ProductPage } from './ProductPage';
+export { default as RegisterPage } from './RegisterPage';
+export { default as UploadPage } from './UploadPage';

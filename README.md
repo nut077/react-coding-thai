@@ -63,3 +63,6 @@ yarn add @react-pdf/renderer
 
 ### react pdf table
 yarn add @david.kucsai/react-pdf-table
+
+### charts
+yarn add recharts

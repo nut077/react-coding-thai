@@ -1,29 +1,28 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ProductPage from './pages/ProductPage';
+import { NavBar, Footer } from './components';
+import {
+  HomePage,
+  AboutPage,
+  ProductPage,
+  DetailPage,
+  UploadPage,
+  LoginPage,
+  RegisterPage,
+  MemberPage,
+  CartPage,
+} from './pages';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import DetailPage from './pages/DetailPage';
-import HospitalPage from './pages/hospital/HospitalPage';
-import NewsList from './pages/news/NewsList';
-import CreateNews from './pages/news/CreateNews';
-import EditNews from './pages/news/EditNews';
-import UploadPage from './pages/UploadPage';
+import { HospitalPage } from './pages/hospital';
+import { NewsList, CreateNews, EditNews } from './pages/news';
 import { ToastProvider } from 'react-toast-notifications';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import MemberPage from './pages/MemberPage';
 import PrivateRoute from './guard/auth';
 import UserStoreProvider from './context/UserStoreContext';
 
 // redux setup
 import { Provider } from 'react-redux';
-import CartPage from './pages/CartPage';
 import configureStore from './redux/configureStore';
-import PdfReport from './pages/report/PdfReport';
+import { PdfReport, ChartReport } from './pages/report';
 
 //const store = createStore(rootReducer);
 const { store } = configureStore();
@@ -74,6 +73,7 @@ function App() {
                   <Route path="/login" component={LoginPage} />
                   <Route path="/upload" component={UploadPage} />
                   <Route path="/pdf" component={PdfReport} />
+                  <Route path="/chart" component={ChartReport} />
 
                   <PrivateRoute path="/member">
                     <MemberPage />

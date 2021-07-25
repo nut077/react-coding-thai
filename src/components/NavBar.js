@@ -98,6 +98,14 @@ const NavBar = () => {
           >
             Member
           </NavLink>
+          <NavLink
+            className="nav-link"
+            to="/chart"
+            exact
+            activeClassName="active"
+          >
+            Chart
+          </NavLink>
         </Nav>
         {/*<Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
